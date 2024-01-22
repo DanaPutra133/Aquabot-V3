@@ -15,11 +15,11 @@ global.author = '@dana_putra13'
 global.maxwarn = '2' // Peringatan maksimum
 
 //INI WAJIB DI ISI!//
-global.lann = '' 
+global.lann = '//Daftar terlebih dahulu https://api.betabotz.eu.org' 
 //Daftar terlebih dahulu https://api.betabotz.eu.org
 
 //INI OPTIONAL BOLEH DI ISI BOLEH JUGA ENGGA//
-global.btc = ''
+global.btc = '//Daftar terlebih dahulu https://api.betabotz.eu.org'
 //Daftar https://api.botcahx.eu.org 
 
 global.APIs = {   
@@ -27,8 +27,8 @@ global.APIs = {
   btc: 'https://api.botcahx.eu.org'
 }
 global.APIKeys = { 
-  'https://api.betabotz.eu.org': '', 
-  'https://api.botcahx.eu.org': ''
+  'https://api.betabotz.eu.org': '//Daftar terlebih dahulu https://api.betabotz.eu.org', 
+  'https://api.botcahx.eu.org': '//Daftar terlebih dahulu https://api.betabotz.eu.org'
 }
 
 let fs = require('fs')
