@@ -768,9 +768,9 @@ global.dfail = (type, m, conn) => {
         owner: 'Perintah ini hanya dapat digunakan oleh _*Owner Bot*_!',
         mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_ !',
         premium: 'Perintah ini hanya untuk member _*Premium*_ !',
-        group: 'semua perintah hanya bisa di grup!',
-        private: 'semua perintah hanya bisa di grup!',
-        admin: 'Perintah ini hanya untuk *Admin* grup!',
+        group: 'Perintah ini hanya untuk *Admin* grup! ketik .gcbot untuk masuk grub bot!',
+        private: 'Perintah ini hanya untuk *Admin* grup! ketik .gcbot untuk masuk grub bot!',
+        admin: 'Perintah ini hanya untuk *Admin* grup! ketik .gcbot untuk masuk grub bot!',
         botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
         unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Mansur.16*',
         restrict: 'Fitur ini di *disable*!'
