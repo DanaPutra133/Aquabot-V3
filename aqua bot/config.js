@@ -1,25 +1,25 @@
-global.owner = ['6281289694906']  
-global.mods = ['6281289694906'] 
-global.prems = ['6281289694906']
-global.nameowner = 'dana'
-global.numberowner = '6281289694906'
-global.mail = 'danaputra1001@gmail.com' 
-global.gc = 'https://chat.whatsapp.com/EUKH9asOX4y8DkikAtueEj'
-global.instagram = 'https://instagram.com/dana_putra13'
-global.wm = 'Aqua Bot'
+global.owner = ['']  
+global.mods = [''] 
+global.prems = ['']
+global.nameowner = ''
+global.numberowner = ''
+global.mail = '' 
+global.gc = '' //link gc bot nya
+global.instagram = ''
+global.wm = '' //wm buat di stiker sama plugin lain nya
 global.wait = '_*Tunggu sedang di proses...*_'
 global.eror = '_*Server Error*_'
 global.stiker_wait = '*⫹⫺ Stiker sedang dibuat...*'
-global.packname = 'aqua bot'
-global.author = '@dana_putra13'
-global.maxwarn = '2' // Peringatan maksimum
+global.packname = 'nama bot nya'
+global.author = 'nama author'
+global.maxwarn = '2' // Peringatan maksimum klaau di berikan ke user lebih dari 2x auto kick
 
 //INI WAJIB DI ISI!//
-global.lann = '//Daftar terlebih dahulu https://api.betabotz.eu.org' 
+global.lann = '' 
 //Daftar terlebih dahulu https://api.betabotz.eu.org
 
 //INI OPTIONAL BOLEH DI ISI BOLEH JUGA ENGGA//
-global.btc = '//Daftar terlebih dahulu https://api.betabotz.eu.org'
+global.btc = ''
 //Daftar https://api.botcahx.eu.org 
 
 global.APIs = {   
@@ -27,8 +27,8 @@ global.APIs = {
   btc: 'https://api.botcahx.eu.org'
 }
 global.APIKeys = { 
-  'https://api.betabotz.eu.org': '//Daftar terlebih dahulu https://api.betabotz.eu.org', 
-  'https://api.botcahx.eu.org': '//Daftar terlebih dahulu https://api.betabotz.eu.org'
+  '': '', 
+  '': ''
 }
 
 let fs = require('fs')
