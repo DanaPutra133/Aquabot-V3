@@ -5,7 +5,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     throw `Masukkan URL!\n\ncontoh:\n${usedPrefix}${command} https://pin.it/4CVodSq`;
   }
   try {
-    m.reply(wait);
     const api = await fetch(`https://api.betabotz.eu.org/api/download/pinterest?url=${args[0]}&apikey=${lann}`);
     const res = await api.json();
     let { media_type, image, title } = res.result.data;
