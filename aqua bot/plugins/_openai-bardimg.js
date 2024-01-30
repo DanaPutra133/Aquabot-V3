@@ -5,8 +5,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || q.mediaType || '' 
   if (/image/g.test(mime) && !/webp/g.test(mime)) {
-    let buffer = await q.download()
-    await m.reply(wait)    
+    let buffer = await q.download() 
     try {
       let media = await uploader(buffer)
       let json = await (await fetch(`https://api.betabotz.eu.org/api/search/bard-img?url=${media}&text=${text}&apikey=${lann}`)).json()  
@@ -24,6 +23,7 @@ handler.tags = ['tools']
 handler.command = /^(bardimg|bardimage)$/i
 handler.limit = true;
 handler.group = true
+handler.limit = 2
 
 
 module.exports = handler

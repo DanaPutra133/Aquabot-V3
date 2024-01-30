@@ -704,33 +704,7 @@ module.exports = {
         case 'remove':
 		case 'leave':
 		case 'invite':
-		case 'invite_v4':
-                if (chat.welcome) {
-                    let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
-                    for (let user of participants) {
-                        let pp = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mFzSckd12spppS8gAJ2KB2ER-ccZd4pBbw&usqp=CAU'
-                        try {
-                             pp = await this.profilePictureUrl(user, 'image')
-                        } catch (e) {
-                        } finally {
-                            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc.toString()) :
-                                (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-                            this.sendMessage(id, {
-                            text: text,
-                            contextInfo: {
-			    mentionedJid: [user],
-                            externalAdReply: {  
-                            title: action === 'add' ? 'Selamat Datang' : 'Selamat tinggal',
-                            body: global.wm,
-                            thumbnailUrl: pp,
-                            sourceUrl: 'https://api.betabotz.eu.org',
-                            mediaType: 1,
-                            renderLargerThumbnail: true 
-                            }}}, { quoted: null})
-                        }
-                    }
-                }
-                break                        
+		case 'invite_v4':                  
             case 'promote':
                 text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
             case 'demote':

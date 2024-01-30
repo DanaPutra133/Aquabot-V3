@@ -14,14 +14,8 @@ conn.sendFile(m.chat, js.result.HD, 'fb.mp4', '', m);
     }
   }
 };
-// handler.help = ['facebook'];
-// handler.command = /^(fb|facebook|facebookdl|fbdl|fbdown|dlfb)$/i;
-// handler.tags = ['downloader'];
-// handler.limit = true;
-// handler.group = false;
-// handler.fail = null;
-// handler.private = false;
-// module.exports = handler;
+
+
 handler.help = ['facebook'];
 handler.command = /^(fb|facebook|facebookdl|fbdl|fbdown|dlfb)$/i;
 handler.tags = ['downloader'];

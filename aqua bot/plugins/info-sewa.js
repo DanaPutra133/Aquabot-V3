@@ -1,10 +1,31 @@
-let fetch = require('node-fetch')
 
-let handler = async (m, { conn, command }) => {
-    let buffer = await fetch(`https://telegra.ph/file/1c53a85e78e81e2aaad9c.jpg`).then(res => res.buffer())
-    conn.sendFile(m.chat, buffer, 'hasil.jpg', `*Jika telah melakukan pembayaran silahkan kirimkan bukti pembayaran ke WhatsApp Owner.*`, m)
+let fs = require('fs')
+let handler = async (m, { conn }) => {
+let teks = 'donasi'
+let dana = global.dana
+let pulsa = global.pulsa
+let gopay = global.gopay
+let numberowner = global.numberowner
+let anu = `Hai 👋
+Kalian bisa mendukung saya agar bot ini tetap up to date dengan:
+┌〔 Donasi • Emoney 〕
+├ Dana : ${dana}
+├ Pulsa : ${pulsa}
+└────
+Berapapun donasi kalian akan sangat berarti 👍
+
+Terimakasih =D
+
+Contact person Owner:
+wa.me/${numberowner} (Owner)
+
+*Kirim bukti ke .owner nanti dapat hadiahxp + limit :)*`
+  m.reply(anu)
 }
-
 handler.help = handler.command = ['donasi','donate','sewa','sewabot','belibot']
 handler.tags = ['main']
+
+handler.group = true
+
 module.exports = handler
+

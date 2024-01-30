@@ -20,5 +20,6 @@ handler.help = ['tourl <reply image>']
 handler.tags = ['sticker']
 handler.command = /^(upload|tourl)$/i
 handler.group = true
+handler.limit = 1
 
 module.exports = handler

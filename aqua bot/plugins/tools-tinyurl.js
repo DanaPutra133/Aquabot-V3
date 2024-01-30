@@ -10,5 +10,6 @@ handler.help = ['tinyurl'].map(v => v + ' <link>')
 handler.tags = ['shortlink']
 handler.command = /^tinyurl$/i
 handler.group = true
+handler.limit = 1
 
 module.exports = handler

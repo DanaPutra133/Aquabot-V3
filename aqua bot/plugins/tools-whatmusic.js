@@ -19,7 +19,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 handler.help = ['whatmusic']
 handler.tags = ['tools']
 handler.command = /^(whatmusic)$/i
-handler.limit = true;
+handler.limit = 1
 handler.group = true;
 
 module.exports = handler

@@ -37,7 +37,7 @@ m.reply(text5)
 ketik *${usedPrefix}group buka*
 Untuk membuka grup!`.trim()
 	await m.reply(teks)
-	} else if (isClose === 'not_announcement') {
+	} else if (isClose == 'not_announcement') {
 	await conn.groupSettingUpdate(m.chat, isClose)
 	await m.reply(bu)
 	} else if (isClose === undefined) {
