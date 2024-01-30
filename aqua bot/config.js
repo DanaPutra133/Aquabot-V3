@@ -2,17 +2,17 @@ global.owner = ['6281289694906']
 global.mods = ['6281289694906'] 
 global.prems = ['6281289694906']
 global.nameowner = 'dana'
-global.numberowner = '6281289694906'
-global.mail = 'danaputra1001@gmail.com' 
-global.gc = 'https://chat.whatsapp.com/EUKH9asOX4y8DkikAtueEj'
-global.instagram = 'https://instagram.com/dana_putra13'
-global.wm = 'Aqua Bot'
+global.numberowner = ''
+global.mail = '' 
+global.gc = ''
+global.instagram = ''
+global.wm = ''
 global.wait = '_*Tunggu sedang di proses...*_'
 global.eror = '_*Server Error*_'
 global.stiker_wait = '*⫹⫺ Stiker sedang dibuat...*'
-global.packname = 'aqua bot'
-global.author = '@dana_putra13'
-global.maxwarn = '2' // Peringatan maksimum
+global.packname = ''
+global.author = ''
+global.maxwarn = '' // Peringatan maksimum
 
 //INI WAJIB DI ISI!//
 global.lann = '' 
