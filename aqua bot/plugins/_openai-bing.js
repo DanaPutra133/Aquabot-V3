@@ -56,7 +56,7 @@ let handler = async (m, {
 
 handler.command = handler.help = ['bing', 'bingimg']
 handler.tags = ['tools']
-handler.limit = true
+handler.limit = 2
 handler.group = true
 
 

@@ -20,6 +20,7 @@ handler.help = ['pinterest <keyword>'];
 handler.tags = ['internet', 'downloader'];
 handler.command = /^(pinterest)$/i;
 handler.group = true
+handler.limit = 1
 
 
 module.exports = handler;
