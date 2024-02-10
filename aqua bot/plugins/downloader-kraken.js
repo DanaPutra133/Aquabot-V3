@@ -1,35 +1,31 @@
-const fetch = require("node-fetch")
-const util = require("util")
+let fetch = require('node-fetch')
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) throw `*🚩 Example:* ${usedPrefix}${command} https://krakenfiles.com/view/neTIvR1wIz/file.html`
+    let data = await (await fetch(`https://api.betabotz.eu.org/api/download/kraken?url=${text}&apikey=${lann}`)).json()
+    let msg = `乂 *K R A K E N  D O W N L O A D E R*\n\n`
+    msg += ` ◦ *Name :* ${data.result.fileName}`
+    msg += ` ◦ *View :* ${data.result.views}\n`
+    msg += ` ◦ *Size :* ${data.result.fileSize}\n`
+    msg += ` ◦ *Type :* ${data.result.fileType}\n`
+    msg += ` ◦ *Uploaded :* ${data.result.uploadDate}\n`
+    msg += ` ◦ *Download :* ${data.result.downloads}\n`
+    msg += ` ◦ *Last Download :* ${data.result.lastDownloadDate}\n`
+    msg += ` ◦ *Link :* ${data.result.urlDownload}`
+    msg += `\n`
+    await conn.sendFile(m.chat, 'https://krakenfiles.com/images/kf_logo_dark.png', 'thumb_.png', msg, m)
+    await conn.sendMessage(m.chat, { document: { url: data.result.urlDownload }, fileName: data.result.fileName, mimetype: data.result.fileType }, { quoted: m })
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) throw `contohd dari perintah ${usedPrefix}${command} https://kraken.nswardh.com/k`
-    m.reply(wait)
-     const url = args[0];
-     let re = await fetch(`https://api.betabotz.eu.org/api/download/KrakenDownload?url=${url}&apikey=${lann}`)
-     let message = await re.json()  
-    try {             
-        for (let i of message.message ) {
-            conn.sendFile(m.chat, i._url, null, `*Instagram Downloader*`, m)
-        }
-        // perintah untuk mengambil data url dari kraken yang di anggap benar 
-        // jka ingin di hapus silahkan di hapus
-        {
-            const url = args[0];
-            let re = await fetch(`https://api.betabotz.eu.org/api/download/KrakenDownload?url=${url}&apikey=${lann}`)
-            let message = await re.json(0) 
-            sendurl = message
-        }
-    } catch(err) {
-        m.reply(`${eror}`)
-    }
+    // {
+    //     CSSFontFeatureValuesRule conn.sendFile(m)
+
+    // }
 }
 
-handler.help = ['krakendl'].map(v => v + ' <url>')
-handler.tags = ['downloader']
-handler.command = /^(Instagram|ig|igdl|igstory)$/i
-handler.group = true
+handler.help = ['krakendownload'].map(v => v + ' <url>');
+handler.tags = ['downloader'];
+handler.command =  /^(krakendl|krakendownload)$/i
 handler.limit = 2
-
+handler.group = true;
 
 
 module.exports = handler
