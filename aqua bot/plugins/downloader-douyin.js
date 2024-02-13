@@ -1,40 +1,34 @@
 const fetch = require('node-fetch');
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   if (!args[0]) {
-    throw `Masukkan URL!\n\ncontoh:\n${usedPrefix + command} https://v.douyin.com/ikq8axJ/`;
+    throw `Masukkan URL!\n\ncontoh:\n${usedPrefix + command} https://v.douyin.com/ieWfMQA1/`;
   }
     if (!args[0].match(/douyin/gi)) {
       throw `URL Tidak Ditemukan!`;
     }
     m.reply('*Mohon tunggu...*');
     try {
-    const api = await fetch(`https://api.betabotz.eu.org/api/download/douyin?url=${args[0]}&apikey=${lann}`);
+    const api = await fetch(`https://api.betabotz.eu.org/api/download/douyin-slide?url=${args[0]}&apikey=${lann}`);
     const res = await api.json();
     var {
-      title, 
-      duration, 
-      total_share,
-      total_download,
-      total_play,
-      total_comment
-    } = res.result.info_video
-    const { 
-    nowm,
-    wm, 
-    audio 
-    } = res.result.url
-     
-  conn.sendFile(m.chat, nowm, null, `*Deskripsi:* ${title}\n*Durasi:* ${duration}\n*Total Share*: ${total_share}\n*Total Download:* ${total_download}\n*Total Play:* ${total_play}\n*Total Komentar:* ${total_comment}\n*Audio:* ${audio}`, m);
+      id, 
+      region, 
+      title,
+      play
+    } = res.result.data
+    for (let i of res.result.data.images) {
+    await sleep(3000)
+    conn.sendFile(m.chat, i, null, `*Deskripsi:* ${title}\n*Region*: ${region}\n*ID:* ${id}\n*Audio:* ${play}`, m);
+        }
   } catch (e) {
     console.log(e);
-    throw `Terjadi kesalahan!`;
+    throw `🚩 *Terjadi kesalahan!*`
   }
 };
-handler.help = ['douyin'];
-handler.command = /^(douyin)$/i;
+handler.command = handler.help = ['douyinslide'];
 handler.tags = ['downloader'];
-handler.limit = true;
-handler.group = true;
+handler.limit = 2
+handler.group = false;
 handler.premium = false;
 handler.owner = false;
 handler.admin = false;
@@ -42,4 +36,7 @@ handler.botAdmin = false;
 handler.fail = null;
 handler.private = false;
 
-module.exports = handler;
+module.exports = handler
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
