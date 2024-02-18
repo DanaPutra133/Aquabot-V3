@@ -5,7 +5,7 @@ handler.all = async function (m, { isBlocked }) {
     if (isBlocked) return
     if ((m.mtype === 'groupInviteMessage' || m.text.startsWith('Undangan untuk bergabung') || m.text.startsWith('Invitation to join') || m.text.startsWith('Buka tautan ini')) && !m.isBaileys && !m.isGroup) {
     let teks = `Invite Group
-    • permanent / Rp 8k 
+    pembuatan bot khusus untuk 1 penyewa 1 bot
 Jika berminat hubungi: @${global.owner[0]} untuk order:)
 `
     this.reply(m.chat, teks, m)
