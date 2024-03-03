@@ -1,12 +1,5 @@
 /* 
-Script By Reelly XD
-  • YT: ReellyXD
-  • IG: reellyxd
-Buy Script? 
-  • WA: +62 857-0436-85323
-  • TELE: t.me/rely_xd
-  • Github: github.com/ReellyXD
-*/
+Script By dana -> sumpah susah banget ini sc 
 
 const { downloadContentFromMessage } = require('@adiwajshing/baileys')
 
