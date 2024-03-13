@@ -32,6 +32,6 @@ handler.tags = ['tools']
 handler.command = ['readviewonce', 'read', 'rvo', 'liat', 'readvo']
 handler.premium = false
 handler.register = false
-handler.limit = true
+handler.limit = false
 
 module.exports = handler
