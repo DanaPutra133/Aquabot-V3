@@ -19,6 +19,6 @@ m.reply(`${eror}`)
 handler.command = handler.help = ['ai2','openai2','chatgpt2'];
 handler.tags = ['info'];
 handler.premium = false
-handler.group = true
+handler.group = false
 
 module.exports = handler;
