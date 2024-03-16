@@ -2,15 +2,14 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 
 let handler = async (m, { text }) => {
-	if (!text) throw 'Input Query'
+	if (!text) throw 'masukan judul *lagu* yang ingin di cari chords nya!'
 	let a = await chord(text)
-	m.reply(`*Song :* ${text}\n*Chord :*\n\n${a.chord}`)
+	m.reply(`*lagu :* ${text}\n*Chord nya :*\n\n${a.chord}`)
 }
 
 handler.help = ['chord <judul lagu>']
 handler.tags = ['internet']
 handler.command = /^(chord)$/i
-handler.group = true
 
 handler.limit = true
 
