@@ -23,7 +23,7 @@ let handler = async (m, { conn, args }) => {
 handler.help = ['tts <teks>'];
 handler.tags = ['tools'];
 handler.command = /^tts$/i;
-handler.group = true
+handler.limit = true;
 module.exports = handler;
 
 function tts(text, lang = 'id') {
