@@ -1,3 +1,6 @@
+
+// sc by betabotz/tio customize by dana putra, 
+
 const jimp = require('jimp')
 
 const resize = async (image, width, height) => {
