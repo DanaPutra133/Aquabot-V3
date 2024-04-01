@@ -10,3 +10,5 @@ handler.command = /^hsur$/i
 handler.limit = true
 
 module.exports = handler
+
+// sc murni dari nanas thanks to nans offc 

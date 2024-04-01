@@ -10,3 +10,5 @@ handler.command = /^hint$/i
 handler.limit = true
 
 module.exports = handler
+
+// sc murni dari nanas thanks to nans offc 

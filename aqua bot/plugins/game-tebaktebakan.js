@@ -31,3 +31,5 @@ handler.premium = false
 handler.limit = false
 
 module.exports = handler
+
+// sc murni dari nanas thanks to nans offc 
