@@ -1,6 +1,3 @@
-
-// sc by betabotz/tio customize by dana putra, 
-
 const jimp = require('jimp')
 
 const resize = async (image, width, height) => {
@@ -404,4 +401,5 @@ handler.help = ['werewolf'];
 handler.tags = ['game'];
 handler.command = ['ww','werewolf'];
 handler.group = true;
+handler.private = false;
 module.exports = handler
