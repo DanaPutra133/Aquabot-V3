@@ -1,9 +1,10 @@
 let fetch = require('node-fetch')
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `*🚩 Example:* ${usedPrefix}${command} https://krakenfiles.com/view/neTIvR1wIz/file.html`
-    let data = await (await fetch(`https://api.betabotz.eu.org/api/download/kraken?url=${text}&apikey=${lann}`)).json()
+    if (!text) throw `*🚩 Example:* ${usedPrefix}${command} https://krakenfiles.com/view/neTIvR1wIz/file.html&apikey=GwFGx4gp`
+    await m.reply(wait)
+    let data = await (await fetch(`https://api.botcahx.eu.org/api/download/kraken?url=${text}&apikey=${btc}`)).json()
     let msg = `乂 *K R A K E N  D O W N L O A D E R*\n\n`
-    msg += ` ◦ *Name :* ${data.result.fileName}`
+    msg += ` ◦ *Name :* ${data.result.fileName}\n`
     msg += ` ◦ *View :* ${data.result.views}\n`
     msg += ` ◦ *Size :* ${data.result.fileSize}\n`
     msg += ` ◦ *Type :* ${data.result.fileType}\n`
@@ -14,18 +15,14 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     msg += `\n`
     await conn.sendFile(m.chat, 'https://krakenfiles.com/images/kf_logo_dark.png', 'thumb_.png', msg, m)
     await conn.sendMessage(m.chat, { document: { url: data.result.urlDownload }, fileName: data.result.fileName, mimetype: data.result.fileType }, { quoted: m })
-
-    // {
-    //     CSSFontFeatureValuesRule conn.sendFile(m)
-
-    // }
 }
 
 handler.help = ['krakendownload'].map(v => v + ' <url>');
 handler.tags = ['downloader'];
 handler.command =  /^(krakendl|krakendownload)$/i
-handler.limit = 2
+handler.limit = true;
+handler.register = false;
+handler.premium = false;
 handler.group = true;
-
 
 module.exports = handler
