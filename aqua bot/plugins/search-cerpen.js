@@ -46,11 +46,11 @@ let handler = async (m, {conn, command}) => {
         const res = await (await fetch(`https://api.betabotz.eu.org/api/story/cerpen?type=sastra&apikey=${lann}`)).json();
         anu += `Judul: *${res.result.title}*\nAuthor: *${res.result.author}*\nKategori: *${res.result.kategori}*\nLolos: *${res.result.lolos}*\n\n*Cerita:* ${res.result.cerita}\n `
     }
-    else if(command === 'jepang') {
+    else if(command === 'cerjepang') {
         const res = await (await fetch(`https://api.betabotz.eu.org/api/story/cerpen?type=jepang&apikey=${lann}`)).json();
         anu += `Judul: *${res.result.title}*\nAuthor: *${res.result.author}*\nKategori: *${res.result.kategori}*\nLolos: *${res.result.lolos}*\n\n*Cerita:* ${res.result.cerita}\n `
     }
-    else if(command === 'korea') {
+    else if(command === 'cerkorea') {
         const res = await (await fetch(`https://api.betabotz.eu.org/api/story/cerpen?type=korea&apikey=${lann}`)).json();
         anu += `Judul: *${res.result.title}*\nAuthor: *${res.result.author}*\nKategori: *${res.result.kategori}*\nLolos: *${res.result.lolos}*\n\n*Cerita:* ${res.result.cerita}\n `
     }
@@ -100,9 +100,11 @@ let handler = async (m, {conn, command}) => {
 
 
 
-handler.command = handler.help = ['remaja', 'anak', 'budaya', 'misteri', 'romantis', 'cinta', 'gokil', 'galau', 'Kehidupan', 'inspiratif', 'sastra', 'jepang', 'korea', 'keluarga', 'persahabatan', 'kristen', 'ramadhan', 'liburan', 'lingkungan', 'mengharukan'];
+handler.command = handler.help = ['remaja', 'anak', 'budaya', 'misteri', 'romantis', 'cinta', 'gokil', 'galau', 'Kehidupan', 'inspiratif', 'sastra', 'cerjepang', 'cerkorea', 'keluarga', 'persahabatan', 'kristen', 'ramadhan', 'liburan', 'lingkungan', 'mengharukan'];
 handler.tags = ['cerpen'];
 handler.group = false;
 handler.limit = 1;
 
 module.exports = handler;
+
+//dana_putra13
