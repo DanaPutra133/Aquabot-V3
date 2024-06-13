@@ -106,3 +106,5 @@ handler.command = /^(remaja|anak|budaya|misteri|romantis|cinta|gokil|galau|Kehid
 handler.group = true;
 
 module.exports = handler
+
+//dana_putra13
