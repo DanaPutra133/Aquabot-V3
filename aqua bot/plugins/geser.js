@@ -39,6 +39,15 @@ let handler = async (m, { usedPrefix, command, conn, args }) => {
       return imageMessage;
     }
 
+    // for {let ans of } images {
+    //   if !images{
+
+    //   }
+    //   else {
+    //     break
+    //   }
+    // }
+
     for (let pus of images) {
       push.push({
         body: proto.Message.InteractiveMessage.Body.fromObject({
@@ -69,6 +78,7 @@ let handler = async (m, { usedPrefix, command, conn, args }) => {
         })
       });
     }
+    // di import dari handler aja nanti ini
 
     const msg = generateWAMessageFromContent(m.chat, {
       viewOnceMessage: {
@@ -94,8 +104,11 @@ let handler = async (m, { usedPrefix, command, conn, args }) => {
             })
           })
         }
+        
       }
     }, { quoted: m });
+    await continue.mass
+  
 
     await conn.relayMessage(m.chat, msg.message, {
       messageId: msg.key.id
