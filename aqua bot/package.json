@@ -93,6 +93,6 @@
         "wa-sticker-formatter": "^1.6.0",
         "yargs": "^17.5.1",
         "yt-search": "^2.10.3",
-        "ytdl-core": "npm:@distube/ytdl-core@^4.13.3"
+        "ytdl-core": "github:soya-daizu/ytdl-core#sig-patch"
     }
 }

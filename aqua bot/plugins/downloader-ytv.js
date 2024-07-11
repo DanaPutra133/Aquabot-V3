@@ -31,7 +31,8 @@ conn.sendFile(m.chat, video, title + '.mp4', `
 handler.help = ['ytmp4 <link yt>']
 handler.tags = ['downloader'] 
 handler.command = /^(ytmp4|youtubemp4|ytv)$/i
-handler.limit = true
+handler.limit = 2
+handler
 
 module.exports = handler
 
@@ -74,3 +75,5 @@ async function ytmp4(url) {
       console.log(error)
   })
 }
+
+
