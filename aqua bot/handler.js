@@ -465,7 +465,7 @@ module.exports = {
                     console.error(e)
                 }
             }
-            if (m.isBaileys) return
+        if (m.id.startsWith('BAE5') && m.id.length === 16 || m.isBaileys && m.fromMe) return
             m.exp += Math.ceil(Math.random() * 10)
 
             let usedPrefix
@@ -474,7 +474,7 @@ module.exports = {
             let isROwner = [global.conn.user.jid, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
             let isOwner = isROwner || m.fromMe
             let isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
-            let isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+            let isPrems = isROwner || (db.data.users[m.sender].premiumTime > 0 || db.data.users[m.sender].premium)
             let groupMetadata = (m.isGroup ? (conn.chats[m.chat] || {}).metadata : {}) || {}
             let participants = (m.isGroup ? groupMetadata.participants : []) || []
             let user = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) === m.sender) : {}) || {} // User Data
@@ -704,7 +704,33 @@ module.exports = {
         case 'remove':
 		case 'leave':
 		case 'invite':
-		case 'invite_v4':                  
+		case 'invite_v4':
+                if (chat.welcome) {
+                    let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
+                    for (let user of participants) {
+                        let pp = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mFzSckd12spppS8gAJ2KB2ER-ccZd4pBbw&usqp=CAU'
+                        try {
+                             pp = await this.profilePictureUrl(user, 'image')
+                        } catch (e) {
+                        } finally {
+                            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc ? groupMetadata.desc.toString() : '') :
+                          (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
+                            this.sendMessage(id, {
+                            text: text,
+                            contextInfo: {
+			    mentionedJid: [user],
+                            externalAdReply: {  
+                            title: action === 'add' ? 'Selamat Datang' : 'Selamat tinggal',
+                            body: global.wm,
+                            thumbnailUrl: pp,
+                            sourceUrl: 'https://api.betabotz.eu.org',
+                            mediaType: 1,
+                            renderLargerThumbnail: true 
+                            }}}, { quoted: null})
+                        }
+                    }
+                }
+                break                        
             case 'promote':
                 text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
             case 'demote':
@@ -742,9 +768,9 @@ global.dfail = (type, m, conn) => {
         owner: 'Perintah ini hanya dapat digunakan oleh _*Owner Bot*_!',
         mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_ !',
         premium: 'Perintah ini hanya untuk member _*Premium*_ !',
-        group: 'Perintah ini hanya untuk *Admin* grup! ketik .gcbot untuk masuk grub bot!',
-        private: 'Perintah ini hanya untuk *Admin* grup! ketik .gcbot untuk masuk grub bot!',
-        admin: 'Perintah ini hanya untuk *Admin* grup! ketik .gcbot untuk masuk grub bot!',
+        group: 'Perintah ini hanya dapat digunakan di grup!',
+        private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
+        admin: 'Perintah ini hanya untuk *Admin* grup!',
         botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
         unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Mansur.16*',
         restrict: 'Fitur ini di *disable*!'
