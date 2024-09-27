@@ -412,6 +412,13 @@ module.exports = {
                     autolevelup: true,
                     lastIstigfar: 0,
                 }
+                let bot = global.db.data.bots
+            if (typeof bot !== 'object') global.db.data.bots = {}
+            if (bot) {
+                if (!('gempaDateTime' in bot)) bot.gempaDateTime = ""
+            } else global.db.data.bots = {
+                gempaDateTime: "",
+            }
                 let chat = global.db.data.chats[m.chat]
                 if (typeof chat !== 'object') global.db.data.chats[m.chat] = {}
                 if (chat) {
@@ -419,6 +426,8 @@ module.exports = {
                     if (!('welcome' in chat)) chat.welcome = true
                     if (!('detect' in chat)) chat.detect = false
                     if (!('sWelcome' in chat)) chat.sWelcome = ''
+                    if (!('notifgempa' in chat)) chat.notifgempa = false
+                    if (!('gempaDateTime' in chat)) chat.gempaDateTime = ''
                     if (!('sBye' in chat)) chat.sBye = ''
                     if (!('sPromote' in chat)) chat.sPromote = ''
                     if (!('sDemote' in chat)) chat.sDemote = ''
@@ -434,6 +443,8 @@ module.exports = {
                     sBye: '',
                     sPromote: '',
                     sDemote: '',
+                    notifgempa: false,
+                    gempaDateTime: "",
                     delete: true,
                     antiLink: false,
                     viewonce: false,
