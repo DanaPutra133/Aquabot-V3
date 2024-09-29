@@ -425,6 +425,8 @@ module.exports = {
                     if (!('isBanned' in chat)) chat.isBanned = false
                     if (!('welcome' in chat)) chat.welcome = true
                     if (!('detect' in chat)) chat.detect = false
+                    if (!('antiSticker' in chat)) chat.antiSticker = false
+                    if (!('antiStickernokick' in chat)) chat.antiStickernokick = false
                     if (!('sWelcome' in chat)) chat.sWelcome = ''
                     if (!('notifgempa' in chat)) chat.notifgempa = false
                     if (!('gempaDateTime' in chat)) chat.gempaDateTime = ''
@@ -442,6 +444,8 @@ module.exports = {
                     sWelcome: '',
                     sBye: '',
                     sPromote: '',
+                    antiSticker: false, 
+                    viewonce: false,
                     sDemote: '',
                     notifgempa: false,
                     gempaDateTime: "",
