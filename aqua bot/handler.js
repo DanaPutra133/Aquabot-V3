@@ -451,7 +451,6 @@ module.exports = {
                     gempaDateTime: "",
                     delete: true,
                     antiLink: false,
-                    viewonce: false,
                     antiToxic: true,
                 }
             } catch (e) {
