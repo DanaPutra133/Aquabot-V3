@@ -59,13 +59,6 @@ let handler = async (m, { usedPrefix, command, conn, args }) => {
               name: "cta_url",
               buttonParamsJson: `{"display_text":"Lihat Gambar","cta_type":"1","url":"${pus}"}`
             },
-            {
-                  "name": "quick_reply",
-                  "buttonParamsJson": JSON.stringify({
-                    "display_text": "SEARCH AGAIN",
-                    "id": `${usedPrefix + command}` + command
-                  })
-                }
           ]
         })
       });
