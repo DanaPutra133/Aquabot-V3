@@ -437,6 +437,7 @@ module.exports = {
                     if (!('antiLink' in chat)) chat.antiLink = true
                     if (!('viewonce' in chat)) chat.viewonce = false
                     if (!('antiToxic' in chat)) chat.antiToxic = false
+                    if (!('antifile' in chat)) chat.antifile = false
                 } else global.db.data.chats[m.chat] = {
                     isBanned: false,
                     welcome: true,
@@ -452,6 +453,7 @@ module.exports = {
                     delete: true,
                     antiLink: false,
                     antiToxic: true,
+                    antifile: false,
                 }
             } catch (e) {
                 console.error(e)
