@@ -19,6 +19,7 @@ let tags = {
     'downloader': 'MENU DOWNLOADER',
     'sticker': 'MENU CONVERT',
     'advanced': 'ADVANCED',
+    'rpg': 'rpg',
     'xp': 'MENU EXP',
     'fun': 'MENU FUN',
     'game': 'MENU GAME',
