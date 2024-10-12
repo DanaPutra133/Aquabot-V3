@@ -1,6 +1,5 @@
-
-
-let timeout = 120000
+let timeout = 100000
+let poin = 10000
 let src
 let handler = async (m, { conn, usedPrefix }) => {
   conn.tebakgambar = conn.tebakgambar ? conn.tebakgambar : {}
@@ -9,14 +8,16 @@ let handler = async (m, { conn, usedPrefix }) => {
     conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.tebakgambar[id][0])
     throw false
   }
-  if (!src) src = await (await fetch(global.API('https://raw.githubusercontent.com', '/BochilTeam/database/master/games/tebakgambar.json'))).json()
+  if (!src) src = await (await fetch(`https://api.betabotz.eu.org/api/game/tebakgambar?apikey=${lann}`)).json()
   let json = src[Math.floor(Math.random() * src.length)]
-  if (!json) throw json
+  if (!json) throw "Terjadi kesalahan, ulangi lagi perintah!"
   let caption = `
 ≡ _GAME TEBAK GAMBAR_
 
 ┌─⊷ *SOAL*
+▢ Penjelasan: *${json.deskripsi}*
 ▢ Timeout *${(timeout / 1000).toFixed(2)} detik*
+▢ Bonus: ${poin} money
 ▢ Ketik ${usedPrefix}hint untuk clue jawaban
 ▢ *REPLAY* pesan ini untuk\nmenjawab
 └──────────────
@@ -24,7 +25,7 @@ let handler = async (m, { conn, usedPrefix }) => {
     `.trim()
   conn.tebakgambar[id] = [
     await conn.sendMessage(m.chat, { image: { url: json.img }, caption: caption}, { quoted: m }),
-    json,
+    json, poin,
     setTimeout(() => {
       if (conn.tebakgambar[id]) conn.reply(m.chat, `Waktu habis!\nJawabannya adalah *${json.jawaban}*`, conn.tebakgambar[id][0])
       delete conn.tebakgambar[id]

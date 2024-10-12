@@ -9,7 +9,7 @@ let fetch = require('node-fetch')
 let path = require('path')
 
 let timeout = 120000
-let poin = 1000
+let poin = 10000
 let handler = async (m, { conn, command, usedPrefix }) => {
     conn.tebakhewan = conn.tebakhewan ? conn.tebakhewan : {}
     let id = m.chat
@@ -26,9 +26,6 @@ Timeout *${(timeout / 1000).toFixed(2)} detik*
 Ketik ${usedPrefix}hhew untuk bantuan
 Bonus: ${poin} Kredit sosial\n
 REPLAY SOAL UNTUK MENJAWAB
-*E06 di awal (spasi) lalu jawaban*\n\n
-
-nb: jika gambar tidak muncul mohon di coba kembali
     `.trim()
     conn.tebakhewan[id] = [
         await conn.sendFile(m.chat, json.url, '', caption, m),

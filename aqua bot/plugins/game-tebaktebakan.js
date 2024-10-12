@@ -1,35 +1,44 @@
-const fs = require('fs')
-let timeout = 120000
-let poin = 4999
-let handler = async (m, { conn, command, usedPrefix }) => {
-    conn.game = conn.game ? conn.game: {}
-    let id = 'tebaktebakan-' + m.chat
-    if (id in conn.game) return conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.game[id][0])
-    let src = JSON.parse(fs.readFileSync('./json/tebaktebakan.json', 'utf-8'))
+let fetch = require('node-fetch')
+
+let timeout = 100000
+let poin = 10000
+let handler = async (m, { conn, usedPrefix }) => {
+    conn.tebaktebakan = conn.tebaktebakan ? conn.tebaktebakan : {}
+    let id = m.chat
+    if (id in conn.tebaktebakan) {
+        conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.tebaktebakan[id][0])
+        throw false
+    }
+    // di sini dia ngambil data dari api
+    let src = await (await fetch(`https://api.betabotz.eu.org/api/game/tebaktebakan?apikey=${lann}`)).json()
     let json = src[Math.floor(Math.random() * src.length)]
+    // buat caption buat di tampilin di wa
     let caption = `
 ${json.soal}
 
-Timeout *${(timeout / 1000).toFixed(2)} detik*
-Ketik ${usedPrefix}hkan untuk bantuan
-Bonus: ${poin} XP
+┌─⊷ *SOAL*
+▢ Timeout *${(timeout / 1000).toFixed(2)} detik*
+▢ Ketik ${usedPrefix}tika untuk bantuan
+▢ Bonus: ${poin} money
+▢ *Balas/ replay soal ini untuk menjawab*
+└──────────────
 `.trim()
-    conn.game[id] = [
-        await m.reply(caption),
+    conn.tebaktebakan[id] = [
+        await conn.reply(m.chat, caption, m),
         json, poin,
         setTimeout(() => {
-            if (conn.game[id]) conn.reply(m.chat, `Waktu habis!\nJawabannya adalah *${json.jawaban}*`, conn.game[id][0])
-            delete conn.game[id]
+            if (conn.tebaktebakan[id]) conn.reply(m.chat, `Waktu habis!\nJawabannya adalah *${json.jawaban}*`, conn.tebaktebakan[id][0])
+            delete conn.tebaktebakan[id]
         }, timeout)
     ]
 }
 handler.help = ['tebaktebakan']
 handler.tags = ['game']
-handler.command = /^tebaktebakan$/i
-
-handler.premium = false
-handler.limit = false
+handler.command = /^tebaktebakan/i
+handler.register = false
+handler.group = true
 
 module.exports = handler
 
-// sc murni dari nanas thanks to nans offc 
+// tested di bileys versi 6.5.0 dan sharp versi 0.30.5
+// danaputra133

@@ -6,6 +6,7 @@ let handler = async (m, { conn }) => {
     let ans = json.jawaban
     let clue = ans.replace(/[bcdfghjklmnpqrstvwxyz]/g, '_')
     m.reply('```' + clue + '```')
+    
 }
 handler.command = /^calo$/i
 handler.limit = true

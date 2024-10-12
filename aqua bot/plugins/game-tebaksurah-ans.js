@@ -19,7 +19,7 @@ handler.before = async function (m) {
         // m.reply(JSON.stringify(json, null, '\t'))
         if (m.text.toLowerCase() == json.surah.englishName.toLowerCase().trim()) {
             global.db.data.users[m.sender].exp += this.tebaksurah[id][2]
-            conn.reply(m.chat, `*Benar!*\n+${this.tebaksurah[id][2]} XP`, m)
+            conn.reply(m.chat, `*Benar!*\n+${this.tebaksurah[id][2]} money`, m)
             clearTimeout(this.tebaksurah[id][3])
             delete this.tebaksurah[id]
         } else if (similarity(m.text.toLowerCase(), json.surah.englishName.toLowerCase().trim()) >= threshold)

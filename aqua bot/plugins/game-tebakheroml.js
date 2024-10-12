@@ -11,7 +11,7 @@ let fetch = require('node-fetch')
 
 let fs = require('fs')
 let timeout = 120000
-let poin = 500
+let poin = 10000
 let handler = async (m, { conn, usedPrefix }) => {
     conn.tebakheroml = conn.tebakheroml ? conn.tebakheroml: {}
     let id = 'tebakheroml-' + m.chat
@@ -23,7 +23,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 ┌─⊷ *SOAL*
 ▢ Timeout *${(timeout / 1000).toFixed(2)} detik*
 ▢ Ketik *${usedPrefix}temel* untuk bantuan
-▢ Bonus: *${poin} Exp*
+▢ Bonus: *${poin} money*
 ▢ *replay soal dengan nyerah untuk menyerah*
 └──────────────
 

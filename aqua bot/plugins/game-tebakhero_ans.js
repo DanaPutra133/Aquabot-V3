@@ -9,6 +9,7 @@ edit dikit sama dana
 */
 let similarity = require('similarity')
 const threshold = 0.72
+let poin = 10000
 
 let handler = m => m
 handler.before = async function(m) {
@@ -30,7 +31,8 @@ handler.before = async function(m) {
         if (m.text.toLowerCase() == json.jawaban.toLowerCase().trim()) {
             global.db.data.users[m.sender].exp += this.tebakheroml[id][2]
             // benar
-            conn.reply(m.chat, `Jawaban benar ✅\n+${this.tebakheroml[id][2]} Exp`, m) 
+            users.money += poin
+            conn.reply(m.chat, `Jawaban benar ✅\n+${this.tebakheroml[id][2]} money`, m) 
             clearTimeout(this.tebakheroml[id][3])
             delete this.tebakheroml[id]
         } else if (similarity(m.text.toLowerCase(), json.jawaban.toLowerCase().trim()) >= threshold)

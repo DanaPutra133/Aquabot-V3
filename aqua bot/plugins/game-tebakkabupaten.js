@@ -38,8 +38,6 @@ handler.command = /^tebakkabupaten/i
 
 module.exports = handler
 
-// sc murni dari nanas thanks to nans offc 
-
 
 const baseUrl = 'https://id.m.wikipedia.org';
 async function getRandomKabupaten() {

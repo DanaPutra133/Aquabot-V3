@@ -1,10 +1,15 @@
 let handler = async (m, { conn }) => {
-    conn.game = conn.game ? conn.game : {}
-    let id = 'tebaktebakan-' + m.chat
-    if (!(id in conn.game)) return
-    let json = conn.game[id][1]
-    m.reply('Clue : ' + '```' + json.jawaban.replace(/[AIUEOaiueo]/ig, '_') + '```' + '\n\n_*Jangan Balas Chat Ini Tapi Balas Soalnya*_')
+    conn.tebaktebakan = conn.tebaktebakan ? conn.tebaktebakan : {}
+    let id = m.chat
+    if (!(id in conn.tebaktebakan)) throw false
+    let json = conn.tebaktebakan[id][1]
+    let ans = json.jawaban
+    // kalau ini error clue nya ak mau ada tanda (_) nya ganti string dalam function di bawah ini jadi huruf kecil
+    let clue = ans.replace(/[BCDFGHJKLMNPQRSTFWXYZbcdfghjklmnpqrstvwxyz]/g, '_')
+    m.reply('```' + clue + '```')
 }
-handler.command = /^hkan$/i
+handler.command = /^tika/i
 handler.limit = true
 module.exports = handler
+
+//gh: dana_putra13

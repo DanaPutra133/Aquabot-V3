@@ -61,5 +61,3 @@ handler.command = /^tebaksurah/i
 handler.group = true
 
 module.exports = handler
-
-// sc murni dari nanas thanks to nans offc 
