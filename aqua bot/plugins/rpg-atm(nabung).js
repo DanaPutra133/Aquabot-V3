@@ -11,7 +11,7 @@ let handler = async (m, { conn, command, args }) => {
 }
 handler.help = ['atm *<amount>*', 'atmall']
 handler.tags = ['rpg']
-handler.command = /^atm([0-9]+)|atm|atmall$/i
+handler.command = /^atm([0-9]+)|atm$/is
 handler.owner = false
 handler.mods = false
 handler.premium = false
