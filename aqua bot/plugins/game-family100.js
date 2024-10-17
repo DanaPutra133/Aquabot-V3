@@ -1,4 +1,5 @@
 let fs = require('fs')
+let fetch = require('node-fetch')
 let winScore = 500
 async function handler(m) {
     conn.family = conn.family ? conn.family : {}
