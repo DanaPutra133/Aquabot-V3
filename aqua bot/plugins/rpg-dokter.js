@@ -20,7 +20,7 @@ const handler = async (m, { conn, usedPrefix, command, args }) => {
         "🔍 Gunakan perintah *.dokter cari* untuk mencari pasien secara acak.\n" +
         "🚑 Anda akan menemukan jejak pencuri dan harus melakukan tindakan tertentu untuk menangkapnya.\n" +
         "💰 Anda akan mendapatkan imbalan jika berhasil menangkap pencuri.\n" +
-        "💉 Pilih tindakan dari: beriobat, rawat, suntik dan operasi.\n" +
+        "💉 Pilih tindakan dari: .dokter beriobat, rawat, suntik dan operasi.\n" +
         "🔍 Gunakan perintah *.dokter <tindakan>* untuk merawat dan menyembuhkan pasien.\n" +
         "🔎 Anda dapat membeli obat super *.dokter item obat-super* untuk meningkatkan peluang menyembuhkan pasien.\n" +
         "🏆 Cek peringkat Anda dengan perintah *.dokter leaderboard*.\n" +
@@ -59,10 +59,10 @@ serverMessageId: -1
 
       const level = player.Lv;
       const thiefActions = {
-        1: "beriobat",
-        2: "rawat",
-        3: "suntik",
-        4: "operasi",
+        1: ".dokter beriobat",
+        2: ".dokter rawat",
+        3: ".dokter suntik",
+        4: ".dokter operasi",
       };
       const thiefAction = thiefActions[level];
 
@@ -121,9 +121,9 @@ serverMessageId: -1
       const dokterAction = subCommand.toLowerCase();
       const level = player.Lv;
       const thiefActions = {
-        1: ["beriobat", "rawat", "suntik"],
-        2: ["rawat", "operasi"],
-        3: ["operasi"],
+        1: [".dokter beriobat", ".dokter rawat", ".dokter suntik"],
+        2: [".dokter rawat", ".dokter operasi"],
+        3: [".dokter operasi"],
       };
 
       if (!thiefActions[level].includes(dokterAction)) {

@@ -55,10 +55,10 @@ const handler = async (m, { conn, usedPrefix, command, args }) => {
 
       const level = player.Level;
       const thiefActions = {
-        1: "kejar",
-        2: "tembak",
-        3: "lempar",
-        4: "tangkap",
+        1: ".polisi kejar",
+        2: ".polisi tembak",
+        3: ".polisi lempar",
+        4: ".polisi tangkap",
       };
       const thiefAction = thiefActions[level];
 
@@ -117,9 +117,9 @@ const handler = async (m, { conn, usedPrefix, command, args }) => {
       const polisiAction = subCommand.toLowerCase();
       const level = player.Level;
       const thiefActions = {
-        1: ["kejar", "tembak", "lempar"],
-        2: ["tembak", "tangkap"],
-        3: ["tangkap"],
+        1: [".polisi kejar", ".polisi tembak", ".polisi lempar"],
+        2: [".polisi tembak", ".polisi tangkap"],
+        3: [".polisi tangkap"],
       };
 
       if (!thiefActions[level].includes(polisiAction)) {
