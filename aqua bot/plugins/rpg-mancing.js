@@ -54,8 +54,10 @@ let handler = async (m, {
 				global.db.data.users[m.sender].bawal += bawal;
 				global.db.data.users[m.sender].udang += udang;
 				global.db.data.users[m.sender].lastmancing = Date.now();
-				global.db.data.users[m.sender].udang += paus;
-				global.db.data.users[m.sender].udang += kepiting;
+				global.db.data.users[m.sender].udang += udang;
+				global.db.data.users[m.sender].paus += paus ;
+				global.db.data.users[m.sender].udang +=  udang;
+				global.db.data.users[m.sender].kepiting += kepiting ;
 				global.db.data.users[m.sender].fishingrod -= 1;
 				global.db.data.users[m.sender].totalPancingan += totalCatch;
 			} else {
