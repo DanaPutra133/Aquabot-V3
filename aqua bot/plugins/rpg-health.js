@@ -18,7 +18,7 @@ Successful use of *${count}* 🧃Potion(s)
 
 handler.help = ['heal *jumlah*']
 handler.tags = ['rpg']
-handler.command = /^(heal)$/i
+handler.command = /^(heal|use)$/i
 handler.limit = true
 
 module.exports = handler
