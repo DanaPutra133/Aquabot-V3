@@ -13,6 +13,7 @@ global.stiker_wait = '*⫹⫺ Stiker sedang dibuat...*'
 global.packname = ''
 global.author = ''
 global.maxwarn = '' // Peringatan maksimum
+global.antiporn = true // Auto delete pesan porno (bot harus admin)
 
 //INI WAJIB DI ISI!//
 global.lann = '' 
