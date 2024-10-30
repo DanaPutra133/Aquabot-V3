@@ -68,6 +68,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 ▢ Role: *${role}*
 ▢ Limit: ${limit}
 ▢ Money: ${money}
+└──────────────
 
 ┌─⊷ *STATUS*
 📑 • *Registered:*  ${registered ? 'Yes (' + new Date(regTime) + ')': 'No'}
