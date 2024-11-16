@@ -1,4 +1,3 @@
-
 let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isROwner }) => {
   let isEnable = /true|enable|(turn)?on|1/i.test(command)
   let chat = global.db.data.chats[m.chat]
@@ -94,7 +93,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
           throw false
         }
       }
-      chat.stiker = isEnable
+      chat.autosticker = isEnable
       break
     case 'antibot':
       if (m.isGroup) {
@@ -217,6 +216,22 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
       }
       chat.viewonce = isEnable
     break
+    case 'antifile':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.antifile = isEnable
+    break
+  case 'autobackupdb':
+      if (!isROwner) {
+          global.dfail('rowner', m, conn)
+          throw false
+        }
+      bot.backupDB = isEnable
+      break 
     case 'antivideo':
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
@@ -226,14 +241,38 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
       }
       chat.antivideo = isEnable
       break
+      case 'antiporn':
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
+      chat.antiporn = isEnable
+      break
+      case 'autohd':
+        if (m.isGroup) {
+          if (!(isAdmin || isOwner)) {
+            global.dfail('admin', m, conn)
+            throw false
+          }
+        }
+        chat.autohd = isEnable
+        break
+      
     default:
       if (!/[01]/.test(command)) return m.reply(`
 List option:
 | notifgempa
+| antiporn
 | welcome
 | delete
 | antibot
 | public
+| autohd
 | antilink
 | antidelete
 | autosticker
@@ -249,6 +288,7 @@ List option:
 | pconly
 | gconly
 | swonly
+| autodatabase
 Contoh:
 ${usedPrefix}enable welcome
 ${usedPrefix}disable welcome

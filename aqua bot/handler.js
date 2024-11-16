@@ -344,6 +344,7 @@ module.exports = {
                     if (!isNumber(user.lastgift)) user.lastgift = 0
                     if (!isNumber(user.lastrob)) user.lastrob = 0
                     if (!isNumber(user.lastngojek)) user.lastngojek = 0
+                    
                     if (!isNumber(user.lastngewe)) user.lastngewe = 0
                     if (!isNumber(user.ngewe)) user.ngewe = 0
                     if (!isNumber(user.jualan)) user.jualan = 0
@@ -415,6 +416,11 @@ module.exports = {
                     if (!("magic" in user)) user.magic = ""
                     if (!("demon" in user)) user.demon = ""
                     if (!isNumber(user.darahiblis)) user.darahiblis = 0
+                    if (!isNumber(user.lastyoutuber)) user.lastyoutuber = 0
+                    if (!isNumber(user.subscribers)) user.subscribers = 0
+                    if (!isNumber(user.viewers)) user.viewers = 0
+                    if (!isNumber(user.like)) user.like = 0
+                    if (!isNumber(user.playButton)) user.playButton = 0
                     if (!isNumber(user.demonblood)) user.demonblood = 0
                     if (!isNumber(user.demonkill)) user.demonkill = 0
                     if (!isNumber(user.hashirakill)) user.hashirakill = 0
@@ -434,14 +440,8 @@ module.exports = {
                     if (!isNumber(user.lastdate)) user.lastdate = 0
                     if (!isNumber(user.lasttambang)) user.lasttambang = 0
                     if (!isNumber(user.lastngepet)) user.lastngepet = 0
-                    if (!isNumber(user.lastyoutuber)) user.lastyoutuber = 0
-                    if (!isNumber(user.subscribers)) user.subscribers = 0
-                    if (!isNumber(user.viewers)) user.viewers = 0
-                    if (!isNumber(user.like)) user.like = 0
-                    if (!isNumber(user.playButton)) user.playButton = 0
                     if (!isNumber(user.lasttaxi)) user.lasttaxi = 0
-                    if (!isNumber(user.taxi)) user.taxi = 0 
-                   
+                    if (!isNumber(user.taxi)) user.taxi = 0  
                 } else global.db.data.users[m.sender] = {
                     taxi: 0,
                     lasttaxi: 0,
@@ -820,6 +820,7 @@ module.exports = {
                 if (!('antiSticker' in chat)) chat.antiSticker = false
                 if (!('antiStickernokick' in chat)) chat.antiStickernokick = false
                 if (!('viewonce' in chat)) chat.viewonce = false
+                if (!('antiporn' in chat)) chat.antiporn = false
                 if (!('antiToxic' in chat)) chat.antiToxic = false
                 if (!isNumber(chat.expired)) chat.expired = 0
                 if (!("memgc" in chat)) chat.memgc = {}
@@ -840,9 +841,14 @@ module.exports = {
                 if (!('antilinktt' in chat)) chat.antilinktt = false
                 if (!('antilinkttnokick' in chat)) chat.antilinkttnokick = false
                 if (!('antibot' in chat)) chat.antibot = false
+                if (!('autodl' in chat)) chat.autodl = false
+                if (!('autohd' in chat)) chat.autohd = false
             } else global.db.data.chats[m.chat] = {
+                autohd: false,
+                antiporn: false,
                 isBanned: false,
                 welcome: false,
+                autodl: false,
                 welcometype: 1,
                 detect: false,
                 isBannedTime: false,
@@ -858,7 +864,7 @@ module.exports = {
                 antiSticker: false, 
                 antiStickernokick: false, 
                 viewonce: false,
-                antiToxic: true,
+                antiToxic: false,
                 antilinkig: false, 
                 antilinkignokick: false, 
                 antilinkyt: false, 
