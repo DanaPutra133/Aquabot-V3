@@ -32,9 +32,9 @@ ${json.bendera}
         }, timeout)
     ]
 }
-handler.help = ['tebakbendera2']
+handler.help = ['tebakbendera']
 handler.tags = ['game']
-handler.command = /^tebakbendera2/i
+handler.command = /^tebakbendera/i
 handler.register = false
 handler.group = true
 
