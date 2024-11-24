@@ -262,10 +262,20 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
         }
         chat.autohd = isEnable
         break
+        case 'autobio':
+      if (m.isGroup) {
+          if (!(isAdmin || isOwner)) {
+              global.dfail('admin', m, conn)
+              return false
+          }
+          chat.autobio = isEnable
+      } else return global.dfail('group', m, conn)
+      break
       
     default:
       if (!/[01]/.test(command)) return m.reply(`
 List option:
+| autobio
 | notifgempa
 | antiporn
 | welcome

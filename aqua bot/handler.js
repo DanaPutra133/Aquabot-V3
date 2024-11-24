@@ -843,7 +843,9 @@ module.exports = {
                 if (!('antibot' in chat)) chat.antibot = false
                 if (!('autodl' in chat)) chat.autodl = false
                 if (!('autohd' in chat)) chat.autohd = false
+                if (!('autobio' in chat)) chat.autobio = false
             } else global.db.data.chats[m.chat] = {
+                autobio: false,
                 autohd: false,
                 antiporn: false,
                 isBanned: false,
@@ -1276,3 +1278,4 @@ fs.watchFile(file, () => {
     delete require.cache[file]
     if (global.reloadHandler) console.log(global.reloadHandler())
 })
+
