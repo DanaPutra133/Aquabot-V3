@@ -1,5 +1,6 @@
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif')
 const {
+    sendButtonSlide,
     default: makeWASocket,
     makeWALegacySocket,
     extractMessageContent,
@@ -14,6 +15,7 @@ const {
     generateWAMessageFromContent,
     WAMessageStubType,
     WA_DEFAULT_EPHEMERAL,
+    getDevice,
 } = require('@adiwajshing/baileys')
 const { toAudio, toPTT, toVideo } = require('./converter')
 const chalk = require('chalk')
@@ -104,6 +106,137 @@ exports.makeWASocket = (connectionOptions, options = {}) => {
             metadata: groupMetadata
         }
     })
+    // tambahkan GetDevice di import baileys
+    conn.sendButtonSilde = async (jid, text = '', footer = '', buffer, buttons, quoted, copy, urls, options = {}) => {
+        let file, isAndroid = await getDevice(quoted?.id) === 'android' ? true : false
+        if (buffer) {
+            try {
+                file = await conn.getFile(buffer)
+                // if not android, send normal message instead of button
+                if (!isAndroid) return await conn.sendFile(jid, buffer, '', text, quoted, false, options)
+                else buffer = await prepareWAMessageMedia({ [/image/.test(file.mime) ? 'image'
+                : 'video']: file.data }, { upload: conn.waUploadToServer })
+            } catch (e) {
+                console.error(e)
+                file = buffer = null
+            }
+        } else { if (!isAndroid) return await conn.reply(jid, text, quoted) }
+        if (!Array.isArray(buttons[0]) && typeof buttons[0] === 'string') buttons = [buttons]
+        if (!options) options = {}
+        const newbtns = buttons.map(btn => btn[2] == 'cta_copy' ? {
+            name: 'cta_copy',
+            buttonParamsJson: JSON.stringify({
+                display_text: btn[0],
+                copy_code: btn[1]
+            })
+        } : isURL(btn[1]) ? {
+            name: 'cta_url',
+            buttonParamsJson: JSON.stringify({
+                display_text: btn[0],
+                url: btn[1],
+                merchant_url: btn[1]
+            })
+        } : {
+            name: 'quick_reply',
+            buttonParamsJson: JSON.stringify({
+                display_text: btn[0],
+                id: btn[1]
+            }),
+        });
+        const mime = /image/.test(file?.mime || '') ? 'imageMessage' : 'videoMessage'
+        const interactiveMessage = {
+            body: { text: text },
+            footer: { text: footer },
+            header: {
+                hasMediaAttachment: false,
+                [mime]: buffer ? buffer[mime] : null
+            },
+            nativeFlowMessage: {
+                buttons: newbtns,
+                messageParamsJson: ''
+            }
+        }
+        let msgL = generateWAMessageFromContent(jid, {
+            viewOnceMessage: {
+                message: {
+                    interactiveMessage } } }, { ephemeralExpiration: 86400, userJid: conn.user.jid, quoted })
+        return await conn.relayMessage(jid, msgL.message, { messageId: msgL.key.id, ...options })
+},
+
+conn.sendButtonSlide = async (jid, text = '', footer = '', slides, quoted, options = {}) => {
+        const isAndroid = await getDevice(quoted?.id) === 'android' ? true : false
+        const pr = await proto.Message.InteractiveMessage
+        const array = []
+        for (let [txt, ftr, header, thumbnailUrl, buttons] of slides.slice(0, 7)) {
+            if (!isAndroid) return await conn.sendButton(jid, txt, footer, thumbnailUrl, buttons, quoted)
+            try {
+                const mediaMessage = await prepareWAMessageMedia({
+                    [/\.mp4/i.test(thumbnailUrl) ? 'video' : 'image']: { url: thumbnailUrl }
+                }, { upload: conn.waUploadToServer });
+                await array.push({
+                    body: pr.Body.fromObject({
+                        text: txt
+                    }),
+                    footer: pr.Footer.fromObject({
+                        text: ftr
+                    }),
+                    header: pr.Header.create({
+                        title: header,
+                        subtitle: '',
+                        hasMediaAttachment: true,
+                        ...mediaMessage
+                    }),
+                    nativeFlowMessage: pr.NativeFlowMessage.fromObject({
+                        buttons: buttons.map(([display_text, btn, name]) => name == 'cta_copy' ? {
+                            name, buttonParamsJson: JSON.stringify({
+                                display_text,
+                                copy_code: btn
+                            })
+                        } : name == 'cta_url' ? {
+                            name, buttonParamsJson: JSON.stringify({
+                                display_text,
+                                url: btn,
+                                merchant_url: btn
+                            })
+                        } : { // 'quick_reply'
+                            name, buttonParamsJson: JSON.stringify({
+                                display_text,
+                                id: btn
+                            }),
+                        })
+                    })
+                });
+            } catch (e) {
+                console.error('Error preparing media message for :'+txt, e);
+            }
+        }
+        const msg = generateWAMessageFromContent(jid, {
+            viewOnceMessage: {
+                message: {
+                    messageContextInfo: {
+                        deviceListMetadata: {},
+                        deviceListMetadataVersion: 2
+                    },
+                    interactiveMessage: pr.fromObject({
+                        body: pr.Body.create({
+                            text
+                        }),
+                        footer: pr.Footer.create({
+                            text: footer
+                        }),
+                        header: pr.Header.create({
+                            hasMediaAttachment: false
+                        }),
+                        carouselMessage: pr.CarouselMessage.fromObject({
+                            cards: array
+                        })
+                    })
+                }
+            }
+        }, { quoted, ephemeralExpiration: 86400 });
+        return await conn.relayMessage(jid, msg.message, { messageId: msg.key.id });
+        // tambahin return di depan await jika pesan gak muncul 
+    },
 
     conn.ev.on('groups.update', async function groupUpdatePushToDb(groupsUpdates) {
         for (const update of groupsUpdates) {
@@ -1324,7 +1457,7 @@ return await conn.sendMessage(jid, buttonMessage, {quoted})
     m = M.fromObject(m)
     if (m.key) {
         m.id = m.key.id
-        m.isBaileys = m.id && m.id.length === 16 || m.id.startsWith('3EB0') && m.id.length === 12 || false
+        m.isBaileys = m.id && m.id.length === 22 || m.id.startsWith('3EB0') && m.id.length === 22 || false
         m.chat = conn.decodeJid(m.key.remoteJid || message.message?.senderKeyDistributionMessage?.groupId || '')
         m.isGroup = m.chat.endsWith('@g.us')
         m.sender = conn.decodeJid(m.key.fromMe && conn.user.id || m.participant || m.key.participant || m.chat || '')
@@ -1363,7 +1496,7 @@ return await conn.sendMessage(jid, buttonMessage, {quoted})
             m.quoted.mtype = type
             m.quoted.id = m.msg.contextInfo.stanzaId
             m.quoted.chat = conn.decodeJid(m.msg.contextInfo.remoteJid || m.chat || m.sender)
-            m.quoted.isBaileys = m.quoted.id && m.quoted.id.length === 16 || false
+            m.quoted.isBaileys = m.quoted.id && m.quoted.id.length === 22 || false
             m.quoted.sender = conn.decodeJid(m.msg.contextInfo.participant)
             m.quoted.fromMe = m.quoted.sender === conn.user.jid
             m.quoted.text = m.quoted.text || m.quoted.caption || m.quoted.contentText || ''
