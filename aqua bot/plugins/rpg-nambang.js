@@ -38,9 +38,9 @@ let arr = [
 🪨🪨⛏️⛏️🪙  🪙 🪨       \n\n\n➕ kamu di tambang...`, 
 `➕ 💹Mendapatkan hasil tambang....`, 
 `*—[ Hasil nambang kamu ${name} ]—*
-➕ 💹 berlian = [ ${zero3} ]
+➕ 🪨 coal = [ ${zero5} ]
 ➕ ✨ emas = [ ${zero4} ] 	
-➕ ✨ diamond = [ ${zero5} ] 		 
+➕ ✨ diamond = [ ${zero3} ] 		 
 ${wm}`
 ]
 
@@ -50,7 +50,7 @@ await new Promise(resolve => setTimeout(resolve, 10000));
 await conn.sendMessage(m.chat, { text: arr[i], edit: key });
 }
 
-global.db.data.users[m.sender].berlian += rbrb5
+global.db.data.users[m.sender].coal += rbrb5
 global.db.data.users[m.sender].emas += rbrb4 
 global.db.data.users[m.sender].diamond += rbrb3
 global.db.data.users[m.sender].tiketcoin += 1
@@ -62,7 +62,7 @@ handler.help = ['nambang']
 handler.tags = ['rpg']
 handler.command = /^(nambang)$/i
 handler.register = true
-
+handler.rpg = true
 module.exports = handler
 
 
