@@ -1,5 +1,6 @@
 let handler = async (m, { teks, conn, isOwner, isAdmin, args, command }) => {
-  if (!(isAdmin || isOwner)) {
+    if (m.isBaileys) return;
+    if (!(isAdmin || isOwner)) {
       global.dfail('admin', m, conn);
       throw false;
   }
@@ -41,4 +42,4 @@ module.exports = handler;
 
 
 //fix bagian ketika comamnd berjalan mreplay tidak mau terkirim
-//m.reply('Sukses demote @${usr.split('@')[0]}!',  null, {
+//m.reply('Sukses demote @${usr.split('@')[0]}!', null, {
